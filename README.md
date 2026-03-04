@@ -1,10 +1,10 @@
 # dingtalk-chatgroup
 
-快速组建钉钉协作群（项目群、部门群、临时群）。
+## 配置
 
-## 1. 配置
+将以下 JSON 保存为 `mcporter.json`，放到技能目录根路径。
 
-在技能目录放置 `mcporter.json`（必须同时包含通讯录 MCP 和群聊 MCP）：
+示例：
 
 ```json
 {
@@ -20,55 +20,3 @@
   }
 }
 ```
-
-## 2. 验证
-
-```bash
-./scripts/preflight.sh
-./scripts/discover_tools.sh
-```
-
-## 3. 使用
-
-仅预览成员（不建群）：
-
-```bash
-./scripts/create_group.sh --name "营销项目群" --keywords "王,李"
-```
-
-确认创建群：
-
-```bash
-./scripts/create_group.sh --name "营销项目群" --keywords "王,李" --confirm
-```
-
-按 userId 直接建群：
-
-```bash
-./scripts/create_group.sh --name "部门协作群" --members "239979,014118" --confirm
-```
-
-## 4. 渠道联调与调试
-
-检查网关状态：
-
-```bash
-openclaw gateway status --json
-```
-
-查看网关日志（含钉钉插件日志）：
-
-```bash
-tail -n 200 ~/.openclaw/logs/gateway.log
-```
-
-技能预检失败时，优先检查：
-
-- `mcporter.json` 是否在技能目录
-- 两个 MCP URL/key 是否可用
-- 当前会话是否为旧缓存（可新开会话重试）
-
-## 5. 注意
-
-- 默认预览，不会直接建群；必须加 `--confirm` 才执行创建。
-- `mcporter.json` 含敏感 key，请勿提交到公共仓库。
